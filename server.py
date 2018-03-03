@@ -13,7 +13,6 @@ from nktk_raw_pb2 import TrackView
 
 
 MAX_STORE_SIZE = 1000000
-_connection = None
 
 
 log = logging.getLogger(__name__)
@@ -29,11 +28,14 @@ log_handler.setFormatter(log_formatter)
 log.addHandler(log_handler)
 
 
+_connection = None
+
+
 def get_connection():
     global _connection
     if not _connection or _connection.closed:
         _connection = psycopg2.connect(**config.db)
-        _connection.set_session(autocommit = True)
+        _connection.set_session(autocommit=True)
     return _connection
 
 
