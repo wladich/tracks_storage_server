@@ -31,9 +31,17 @@ log.addHandler(log_handler)
 _connection = None
 
 
+def check_connection(conn):
+    try:
+        conn.cursor().execute('SELECT 1')
+        return True
+    except psycopg2.OperationalError:
+        return False
+
+
 def get_connection():
     global _connection
-    if not _connection or _connection.closed:
+    if not _connection or _connection.closed or not check_connection(_connection):
         _connection = psycopg2.connect(**config.db)
         _connection.set_session(autocommit=True)
     return _connection
