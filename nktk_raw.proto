@@ -1,6 +1,5 @@
-syntax = "proto3";
 
 message TrackView {
-    bytes view = 1;
-    bytes track = 2;
+    required bytes view = 1;
+    required bytes track = 2;
 }
