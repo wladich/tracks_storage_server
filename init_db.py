@@ -12,5 +12,6 @@ if __name__ == '__main__':
     schema = open(os.path.join(os.path.dirname(sys.argv[0]), 'init.sql')).read().split(';')
     cursor = connection.cursor()
     for st in schema:
-        cursor.execute(st + ';')
+        if st.strip():
+            cursor.execute(st + ';')
 
