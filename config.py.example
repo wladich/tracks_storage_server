@@ -1,0 +1,15 @@
+# coding: utf-8
+
+db = {
+    'host': 'localhost',
+    'port': 5432,
+    'user': 'postgres',
+    'password': '1',
+    'dbname': 'tracks'
+}
+
+log = {
+    'level': 'DEBUG',
+    'file': None
+    # 'file': '/var/log/tracks_server.log'
+}
