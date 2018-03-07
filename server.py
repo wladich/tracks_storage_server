@@ -302,7 +302,8 @@ class Application(object):
         try:
             method = self.environ['REQUEST_METHOD']
             uri = self.environ['PATH_INFO']
-            self.log('INFO', 'Request accepted', method=method, uri=uri, headers=self.get_headers())
+            self.log('INFO', 'Request accepted', method=method, uri=uri, headers=self.get_headers(),
+                     remote_addr=self.environ['REMOTE_ADDR'])
             if method == 'GET':
                 m = re.match(r'^/track/([A-Za-z0-9_-]+)$', uri)
                 if m:
