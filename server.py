@@ -208,7 +208,10 @@ class Application(object):
     def __init__(self, environ, start_response):
         self.environ = environ
         self._start_response = start_response
-        self.request_id = uuid.uuid4().get_hex()
+        request_id = environ.get('REQUEST_ID')
+        if not request_id:
+            request_id = uuid.uuid4().get_hex()
+        self.request_id = request_id
 
     def log(self, level, message='', **extra):
         extra = dict(extra, request_id=self.request_id)
