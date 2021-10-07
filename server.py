@@ -7,6 +7,7 @@ import re
 import logging
 import uuid
 import json
+import codecs
 
 import config
 from nktk_raw_pb2 import TrackView
@@ -298,6 +299,8 @@ class Application(object):
         headers = {}
         for k, v in self.environ.iteritems():
             if k.startswith('HTTP_'):
+                k = codecs.unicode_escape_decode(k)[0]
+                v = codecs.unicode_escape_decode(v)[0]
                 headers[k[5:]] = v
         return headers
 
